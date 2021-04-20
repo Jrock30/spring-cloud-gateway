@@ -1,0 +1,43 @@
+server:
+  port: 8000
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  application:
+    name: apigateway-service
+  cloud:  # 자바 코드로도 설정할 수 있다.
+    gateway:
+      default-filters:
+        - name: GlobalFilter # 글로벌 필터 클래스 명
+          args:
+            baseMessage: Spring Cloud Gateway Global Filter
+            preLogger: true
+            postLogger: true
+      routes:
+        - id: first-service
+          uri: http://localhost:8081/ # 이동될 주소
+          predicates: # 조건절
+            - Path=/first-service/**
+          filters:
+#            - AddRequestHeader=first-request, first-request-header2
+#            - AddResponseHeader=first-resonse, first-resonse-header2
+            - CustomFilter # 커스텀 필터 클래스명
+        - id: second-service
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/second-service/**
+          filters:
+#            - AddRequestHeader=second-request, second-request-header2
+#            - AddResponseHeader=second-resonse, second-resonse-header2
+            - name: CustomFilter # 커스텀 필터가 여러개 생기면 name 으로 등록해주어여 한다.
+            - name: LoggingFilter
+              args:
+                baseMessage: Hi, there.
+                preLogger: true
+                postLogger: true
