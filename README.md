@@ -8,7 +8,7 @@
 - - -
 Build
  * IDE VM 옵션 Build
-> - -Dserver.port=9002
+> - -Dserver.port={port}
  * Maven Build
 > - mvn spring-boot:run -Dspring-boot.run.jvmArguments='-Dserver.port={port}'
 > - mvn spring-boot:run (port random)
@@ -31,3 +31,4 @@ Build
 - Ribbon, Zuul 은 Spring Boot 2.4 이후 버전은 Maintenance 상태 이므로 하위 2.3.8 이하 버전 사용할 것
 
 - Gateway Client -> Gateway Handler -> Global Filter -> Custom Filter -> LoggingFilter -> Proxied Service
+- Load Balancer Setting
