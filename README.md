@@ -1,10 +1,11 @@
-# Netflix Zuul Server(API Gateway)
+# Spring Cloud Gateway Server(API Gateway)
 - - -
 ## 소프트웨어 구성
 1. OpenJDK 11
 2. Spring Boot 2.3.8.RELEASE
 3. Netflix-Eureka-Client
 4. Spring-Cloud-Gateway (Netty 사용(비동기허용), Zuul 은 톰캣)
+5. Lombok
 - - -
 Build
  * IDE VM 옵션 Build
@@ -32,3 +33,4 @@ Build
 
 - Gateway Client -> Gateway Handler -> Global Filter -> Custom Filter -> LoggingFilter -> Proxied Service
 - Load Balancer Setting
+- User-Service ADD
