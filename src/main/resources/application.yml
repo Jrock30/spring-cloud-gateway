@@ -20,10 +20,34 @@ spring:
             preLogger: true
             postLogger: true
       routes:
+#        - id: user-service
+#          uri: lb://USER-SERVICE # 유레카 서비스(APP) 명
+#          predicates: # 조건절
+#            - Path=/user-service/**
+        - id: user-service
+          uri: lb://USER-SERVICE # 유레카 서비스(APP) 명
+          predicates: # 조건절
+            - Path=/user-service/login # 스프링 시큐리티가 자동으로 처리
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment} # 앞에 user-service 형태를 뺴고 뒤의 형태로 바꾸겠다는 뜻 / 즉 user-service 를 제거
+        - id: user-service
+          uri: lb://USER-SERVICE # 유레카 서비스(APP) 명
+          predicates: # 조건절
+            - Path=/user-service/users
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
         - id: user-service
           uri: lb://USER-SERVICE # 유레카 서비스(APP) 명
           predicates: # 조건절
             - Path=/user-service/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
         - id: catalog-service
           uri: lb://CATALOG-SERVICE # 유레카 서비스(APP) 명
           predicates: # 조건절
