@@ -34,3 +34,5 @@ Build
 - Gateway Client -> Gateway Handler -> Global Filter -> Custom Filter -> LoggingFilter -> Proxied Service
 - Load Balancer Setting
 - User-Service ADD
+- AuthorizationHeaderFilter ADD
+  * Jwt 토큰 유효성 체크 후 Api 요청 및 에러 반환 

@@ -20,10 +20,6 @@ spring:
             preLogger: true
             postLogger: true
       routes:
-#        - id: user-service
-#          uri: lb://USER-SERVICE # 유레카 서비스(APP) 명
-#          predicates: # 조건절
-#            - Path=/user-service/**
         - id: user-service
           uri: lb://USER-SERVICE # 유레카 서비스(APP) 명
           predicates: # 조건절
@@ -48,6 +44,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter # 인증 헤더필터 처리
         - id: catalog-service
           uri: lb://CATALOG-SERVICE # 유레카 서비스(APP) 명
           predicates: # 조건절
@@ -79,3 +76,6 @@ spring:
                 baseMessage: Hi, there.
                 preLogger: true
                 postLogger: true
+
+token:
+  secret: user_token
