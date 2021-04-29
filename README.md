@@ -6,6 +6,9 @@
 3. Netflix-Eureka-Client
 4. Spring-Cloud-Gateway (Netty 사용(비동기허용), Zuul 은 톰캣)
 5. Lombok
+6. spring-cloud-starter-config
+7. spring-cloud-starter-bootstrap
+8. spring-boot-starter-actuator
 - - -
 Build
  * IDE VM 옵션 Build
@@ -36,3 +39,10 @@ Build
 - User-Service ADD
 - AuthorizationHeaderFilter ADD
   * Jwt 토큰 유효성 체크 후 Api 요청 및 에러 반환 
+
+- Spring Actuator (APP 상태 확인)
+<pre>
+  GET /actuator/beans
+  GET /actuator/health
+  POST /actuator/refresh  ( Config Server 수정 설정 파일 자동 적용 )
+</pre>
