@@ -9,6 +9,7 @@
 6. spring-cloud-starter-config
 7. spring-cloud-starter-bootstrap
 8. spring-boot-starter-actuator
+9. Spring Cloud Starter Bus AMQP
 - - -
 Build
  * IDE VM 옵션 Build
@@ -46,3 +47,8 @@ Build
   GET /actuator/health
   POST /actuator/refresh  ( Config Server 수정 설정 파일 자동 적용 )
 </pre>
+- Spring Cloud Bus Actuator (APP 상태 확인)
+<pre>
+  POST http://127.0.0.1:8000/user-service/actuator/busrefresh  ( Config Server, User Service 일괄 자동 적용 )
+</pre>
+

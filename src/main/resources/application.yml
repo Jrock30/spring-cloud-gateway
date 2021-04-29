@@ -11,6 +11,11 @@ eureka:
 spring:
   application:
     name: apigateway-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   cloud:  # 자바 코드로도 설정할 수 있다.
     gateway:
       default-filters:
@@ -53,7 +58,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-            - AuthorizationHeaderFilter # 인증 헤더필터 처리
+#            - AuthorizationHeaderFilter # 인증 헤더필터 처리
         - id: catalog-service
           uri: lb://CATALOG-SERVICE # 유레카 서비스(APP) 명
           predicates: # 조건절
@@ -93,4 +98,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans, httptrace
+        include: refresh, health, beans, httptrace, busrefresh
