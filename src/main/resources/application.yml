@@ -49,7 +49,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-            - AuthorizationHeaderFilter # 인증 헤더필터 처리
+#            - AuthorizationHeaderFilter # 인증 헤더필터 처리
         - id: user-service
           uri: lb://USER-SERVICE # 유레카 서비스(APP) 명
           predicates: # 조건절
@@ -91,8 +91,9 @@ spring:
                 preLogger: true
                 postLogger: true
 
-token:
-  secret: user_token
+#config-server 에서 가져온다
+#token:
+#  secret: user_token
 
 management:
   endpoints:
